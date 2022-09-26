@@ -40,8 +40,6 @@ do {
 } while (m < 7);
 
 
-// Здесь пыталась хэштег и пробел каждой строки вывести отдельно, но в строку не получается.
-// Так можно сделать?
 
 // for (let z = 0; z < 7; z++) {
 
@@ -80,3 +78,21 @@ while (true) {
 };
 
 console.log(nam);
+
+
+let size = 8;
+
+let board = "";
+
+for (let y = 0; y < size; y++) {
+  for (let x = 0; x < size; x++) {
+    if ((x + y) % 2 == 0) {
+      board += " ";
+    } else {
+      board += "#";
+    }
+  }
+  board += "\n";
+}
+
+console.log(board);

@@ -7,7 +7,7 @@ while (true) {
     else if (fam?.length > 10) {
         fam = prompt('Введите Вашу фамилию', 'Иванов');
     }
-    else if (typeof fam === 'null') {
+    else if (!fam) {
         fam = ' ';
     }
     else break;
@@ -24,7 +24,7 @@ while (true) {
     else if (nam?.length > 10) {
         nam = prompt('Введите Ваше имя', 'Иван');
     }
-    else if (typeof nam === 'null') {
+    else if (!nam) {
         nam = ' ';
     }
     else break;
@@ -42,7 +42,7 @@ while (true) {
     else if (patr?.length > 10) {
         patr = prompt('Введите Ваше отчество', 'Иванович');
     }
-    else if (typeof patr === 'null') {
+    else if (!patr) {
         patr = ' ';
     }
     else break;
