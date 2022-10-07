@@ -5,14 +5,11 @@ const newArr = [5, 7,
 ];
 
 function treeSum(accumulator, currentValue) {
-    if (Array.isArray(currentValue)) {
-        let currentArray = currentValue;
-        currentArray.reduce(treeSum);
-    }
-    return accumulator + currentValue;
+     
+    return accumulator += Array.isArray(currentValue) ? treeSum(currentValue) : +currentValue;
 }
 
-let sum = newArr.reduce(treeSum);
+let sum = newArr.reduce(treeSum, 0);
 
 console.log(sum);
 
