@@ -5,8 +5,22 @@ const newArr = [5, 7,
 ];
 
 function treeSum(accumulator, currentValue) {
-     
-    return accumulator += Array.isArray(currentValue) ? treeSum(currentValue) : +currentValue;
+    if (Array.isArray(currentValue)) {
+        return accumulator += treeSum(currentValue);
+    }
+    // if (typeof currentValue === 'string') {
+    //     let numberValue = Number(currentValue);
+    //     console.log(numberValue)
+    //     return accumulator += numberValue;
+    // }
+    if (typeof currentValue === 'undefined' || currentValue === null || currentValue === NaN) {
+        return accumulator;
+    }
+    else {
+        return accumulator += +currentValue;
+    }
+
+    // return accumulator += Array.isArray(currentValue) ? treeSum(currentValue) : +currentValue;
 }
 
 let sum = newArr.reduce(treeSum, 0);
