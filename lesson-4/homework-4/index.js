@@ -4,26 +4,14 @@ const newArr = [5, 7,
     1, 8
 ];
 
-function treeSum(accumulator, currentValue) {
-    if (Array.isArray(currentValue)) {
-        return accumulator += treeSum(currentValue);
-    }
-    // if (typeof currentValue === 'string') {
-    //     let numberValue = Number(currentValue);
-    //     console.log(numberValue)
-    //     return accumulator += numberValue;
-    // }
-    if (typeof currentValue === 'undefined' || currentValue === null || currentValue === NaN) {
-        return accumulator;
-    }
-    else {
-        return accumulator += +currentValue;
-    }
-
-    // return accumulator += Array.isArray(currentValue) ? treeSum(currentValue) : +currentValue;
+function treeSum(array) {
+    return array.reduce((accumulator, item) => {
+        if (Array.isArray(item)) {
+            return accumulator += treeSum(item)
+        }
+        return accumulator += item;
+    }, 0)
 }
 
-let sum = newArr.reduce(treeSum, 0);
-
-console.log(sum);
+console.log(treeSum(newArr))
 

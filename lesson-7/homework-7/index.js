@@ -28,7 +28,7 @@ class MyString {
             .join('')
     }
     ucFirst() {
-        return this.word[0].toUpperCase() + this.word.slice(1)
+        return this.word[0].toUpperCase() + this.word.slice(1);
     }
     ucWords() {
         return this.word
@@ -40,6 +40,11 @@ class MyString {
 
 const str = new MyString('abcde');
 
-console.log(str.reverse('abcde'));
-console.log(str.ucFirst('abcde'));
-console.log(str.ucWords('abcde abcde abcde'));
+console.log(str.reverse());
+console.log(str.ucWords('abcde'));
+
+const str3 = new MyString('abcde abcde abcde')
+
+const str2 = str.ucWords.call(str3);
+
+console.log(str2);

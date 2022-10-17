@@ -20,7 +20,7 @@ document.writeln(str2);
 
 // Задание 3
 
-//const num = prompt('Введите число', 55);
+const num = prompt('Введите число', 55);
 
 const colonOdd = (number) => {
     return number
@@ -33,12 +33,12 @@ const colonOdd = (number) => {
         })
         .join("");
 };
-//console.log(colonOdd(num));
+console.log(colonOdd(num));
 
 
 // Задание 4
 
-//const str = prompt('Введите слово', 'КаЖдЫй ОхОтНиК');
+const str = prompt('Введите слово', 'КаЖдЫй ОхОтНиК');
 
 function changeRegister(str) {
     return str.split('')
@@ -98,23 +98,14 @@ sum();
 
 // Задание 7  
 
-function countIdentic(arr) {
-    arr2 = [];
-    arr3 = [];
-    arr.forEach((item, index, array) => {
-        if (!arr2.includes(item)) {
-            arr2.push(item);
-            arr.splice(arr.indexOf(item), 1);
-            // Не понятно, почему 19 не удаляется.
-        }
-    });
-    arr.forEach((item, index, array) => {
-        if (!arr3.includes(item)) {
-            arr3.push(item);
-        }
-    });
-    return arr3.length;
-};
+    const countIdentic = (array) => {
+        return array.reduce((acc, item) => {    
+              item = array.shift();            
+                if (array.indexOf(item) >= 0) acc++;            
+              return acc;
+        }, 0);
+      };
+
 console.log(countIdentic([3, 3, 7, 7, 3, 3, 4, 5, 5, 8, 8, 8])) // 4
 console.log(countIdentic([15, 14, 13, 19, 13, 14, 14, 14, 7, 9, 9])) // 3
 
