@@ -1,52 +1,44 @@
+import './Card.js'
+import './Cart.js'
+
+
 class App extends HTMLElement {
     constructor() {
         super();
-        this.data = [
-            {
-                id: 1,
-                title: "Xiaomi 10C",
-                previev: "./images/1",
-                descriptions: "Xiaomi 10C hgdcghhhhhhhhhhhhhhhg hhhhhhh",
-                price: 150,
-            },
-            {
-                id: 1,
-                title: "Xiaomi 20C",
-                previev: "./images/2",
-                descriptions: "Xiaomi 20C hgdcghhhhhhhhhhhhhhhg hhhhhhh",
-                price: 300,
-            },
-            {
-                id: 1,
-                title: "Xiaomi 5X",
-                previev: "./images/3",
-                descriptions: "Xiaomi 5X hgdcghhhhhhhhhhhhhhhg hhhhhhh",
-                price: 600,
-            },
-            {
-                id: 1,
-                title: "Xiaomi 12B",
-                previev: "./images/4",
-                descriptions: "Xiaomi 12B hgdcghhhhhhhhhhhhhhhg hhhhhhh",
-                price: 150,
-            },
-            {
-                id: 1,
-                title: "Xiaomi 15U",
-                previev: "./images/5",
-                descriptions: "Xiaomi 15U hgdcghhhhhhhhhhhhhhhg hhhhhhh",
-                price: 250,
-            },
-      
-        ]
+        this.data = [];
+
     }
 
     connectedCallback() {
-        this.render()
+        this.render();
+        fetch('https://fakestoreapi.com/products')
+            .then((res) => res.json())
+            .then((result) => {
+                this.data = result;
+                this.render();
+            });
     }
 
+
     render() {
-        this.innerHTML = `IT works!`
+        this.innerHTML = `
+        <div class='container mt-5 mb-5'>
+            <div class='col-12'>
+                <it-cart></it-cart>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                ${this.data.map((item) => {
+            return `
+                        <div class="col mt-5">
+                            <it-card data='${JSON.stringify(item)}'></it-card>
+                        </div>
+                    `
+        }).join(' ')}
+            </div>
+        </div>
+        `
     }
 }
 
