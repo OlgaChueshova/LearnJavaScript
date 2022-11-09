@@ -15,9 +15,9 @@ const animateBubble = (colors, index) => {
   const bubble = document.createElement("div");
   visual.appendChild(bubble);
   bubble.style.backgroundColor = colors[index];
-  bubble.style.animation = 'jump 0.1s';
+  bubble.style.animation = 'jump 0.1s linear';
   bubble.addEventListener('animationend', () => {
-    bubble.style.animation = 'none';
+    visual.removeChild(bubble);
   })
 }
 
