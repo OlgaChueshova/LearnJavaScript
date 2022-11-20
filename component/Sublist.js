@@ -11,7 +11,7 @@ export class Sublist extends Component {
         this.toggleSubmenu = this.toggleSubmenu.bind(this)
     }
 
-    toggleSubmenu() {
+    toggleSubmenu(evt) {
         return this.setState((state) => {
             return {
                 ...state,
@@ -27,9 +27,9 @@ export class Sublist extends Component {
             const target = document.querySelector('.header__navigation--dropdown2');
             if(target) {
                 evt.preventDefault();
-                return this.dispatch('it-toggleSubSubMenu');
+                this.dispatch('it-toggleSubSubMenu');
+                evt.stopPropagation()
             }
-            evt.stopPropagation()
         })
     }
 
@@ -39,7 +39,7 @@ export class Sublist extends Component {
 
     render() {
         return `
-            <ul class="mobile-navigation__subMenu ${this.state.isActive ? 'open' : 'closed'}">
+            <ul class="mobile-navigation__catalog mobile-navigation__subMenu ${this.state.isActive ? 'open' : 'closed'}">
                 ${this.props.map((item) => {
                         return `
                             <li class="mobile-catalog__submenu--item mobile-navigation-for-children__link">

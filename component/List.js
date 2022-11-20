@@ -12,7 +12,7 @@ export class List extends Component {
         this.toggleMenu = this.toggleMenu.bind(this)
     }
 
-    toggleMenu() {
+    toggleMenu(evt) {
         return this.setState((state) => {
             return {
                 ...state,
@@ -28,9 +28,9 @@ export class List extends Component {
             const target = evt.target.closest('.header__navigation--dropdown');
             if (target) {
                 evt.preventDefault();
-                return this.dispatch('toggle-submenu', 'sublinks')  
+                this.dispatch('toggle-submenu');
+                evt.stopPropagation()  
             }
-            evt.stopPropagation()
         })
     }
 

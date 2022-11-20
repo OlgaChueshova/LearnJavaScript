@@ -154,9 +154,9 @@ ul {
     margin-bottom: 20px;
     margin-left: 15px;
     padding-left: 10px;
-    border-left: 2px solid transparent;
+    /* border-left: 2px solid transparent;
     border-image: linear-gradient(to bottom, #F7941D, #27AAE1);
-    border-image-slice: 1;
+    border-image-slice: 1; */
 }
 
 .mobile-navigation-for-children__sub-list--item,
@@ -231,9 +231,9 @@ ul {
     margin-bottom: 20px;
     margin-left: 15px;
     padding-left: 10px;
-    border-left: 2px solid transparent;
+    /* border-left: 2px solid transparent;
     border-image: linear-gradient(to bottom, #F7941D, #27AAE1);
-    border-image-slice: 1;
+    border-image-slice: 1; */
 }
 
 .mobile-navigation__location--submenu-link {
