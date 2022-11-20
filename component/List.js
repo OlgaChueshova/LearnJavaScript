@@ -1,93 +1,45 @@
-import { Link } from "./Link.js";
+import { Component } from "./Component.js";
 
-export class List extends HTMLElement {
+export class List extends Component {
     constructor() {
         super();
-        this.links = [
-            {
-                label: 'Все курсы',
-                href: '//'
-            },
-            {
-                label: 'Об академии',
-                href: '//'
-            },
-            {
-                label: 'Мероприятия',
-                href: '//'
-            },
-            {
-                label: 'Новости',
-                href: '//'
-            },
-            {
-                label: 'База знаний',
-                href: '//'
-            },
-            {
-                label: 'Карьера',
-                href: '//'
-            },
-            {
-                label: 'Все контакты',
-                href: '//'
-            },
-            {
-                label: 'Нижний Новгород',
-                href: '//',
-            },
-            {
-                label: 'Войти',
-                href: '//'
-            },
-            {
-                label: '8 800 950-33-98',
-                href: 'tel:88009503398'
-            },
-            {
-                label: 'г.Москва, ул.Ленина, 50',
-                href: ''
-            },
-            {
-                label: 'info@futureacademy.ru',
-                href: 'Mailto:info@futureacademy.ru'
-            },
-        ];
+        this.props = JSON.parse(this.getAttribute('links'))
         this.state = {
-            display: 'none'
+            isOpen: false
         }
+
+        this.toggleMenu = this.toggleMenu.bind(this)
     }
 
-    removeSelf() {
-        const header = document.querySelector('.header-mobile');
-        // const list = evt.target.closest('.mobile-navigation');
-        header.addEventListener('click', () => {
-            if (!this) {
-                return this.remove();
+    toggleMenu() {
+        return this.setState((state) => {
+            return {
+                ...state,
+                isOpen: !this.state.isOpen
             }
         })
     }
 
     connectedCallback() {
-        const header = document.querySelector('.header-mobile');
-        const dropdown = document.querySelector('.header__navigation--dropdown');
-        header.addEventListener('click', () => {
-            if (dropdown) {
-                return this.render();
-            }
-            this.removeSelf();
-        })
+        this.render();
+        window.addEventListener('toggle-menu', this.toggleMenu);
     }
 
-    disconnectedCallback() {
-        this.removeEventListener('click', this.removeSelf);
+    static get observedAttributes() {
+        return ['links'];
     }
 
     render() {
-        this.innerHTML = `
-            <ul class="header-mobile-wrapper__menu--list mobile-navigation">
-                <it-link  links='${JSON.stringify(this.links)}'></it-link>
-            </ul>
+        return `
+            <aside class=${this.state.isOpen ? 'open' : 'closed'}>
+                <ul class="header-mobile-wrapper__menu--list">
+                ${this.props.map((item) => {
+                    return `<li class="mobile-navigation__item">
+                                <a href="${item.href}" class="mobile-navigation__link">${item.label}</a>
+                            </li>`
+                }).join(' ')}
+                </ul>
+            </aside>
         `
     }
 

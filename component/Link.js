@@ -1,8 +1,10 @@
-export class Link extends HTMLElement {
+import { Component } from "./Component.js";
+
+export class Link extends Component {
     constructor() {
         super();
-        this.props = JSON.parse(this.getAttribute('links'));
-        console.log(this.props)
+        this.links = JSON.parse(this.props.items)
+        console.log(this.links)
     }
 
     connectedCallback() {
@@ -13,19 +15,15 @@ export class Link extends HTMLElement {
         return ['links'];
     }
 
-    attributeChangedCallback() {
-
-    }
-
     render() {
         this.innerHTML =  `
-        ${this.props.map((item) => {
+        ${this.links.map((item) => {
             return `
             <li class="mobile-navigation__item header__navigation--dropdown mobile-catalog">
                 <a href="${item.href}" class="mobile-navigation__link">${item.label}</a>
             </li>
             `
-        })}
+        }).join(' ')}
         `
     }
 }

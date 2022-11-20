@@ -1,3 +1,11 @@
+.open {
+    display: block;
+}
+
+.closed {
+    display: none;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -12,13 +20,14 @@ a {
     color: #000000;
     text-decoration: none;
 }
- a:hover {
-    cursor: pointer;
- }
 
- ul {
+a:hover {
+    cursor: pointer;
+}
+
+ul {
     list-style-type: none;
- }
+}
 
 .header-mobile-wrapper {
     display: flex;
@@ -66,7 +75,7 @@ a {
 } */
 
 .header-mobile-wrapper__menu--list {
-    display: flex;
+    display: flex; 
     position: absolute;
     width: 310px;
     height: min-content;
@@ -151,7 +160,7 @@ a {
 .mobile-navigation-for-adults__sub-list--item {
     display: block;
     width: 100%;
-} 
+}
 
 .mobile-navigation-for-children__sub-list--link,
 .mobile-navigation-for-teenagers__sub-list--link,
@@ -177,8 +186,9 @@ a {
     display: inline-block;
     position: relative;
 }
-/* 
-.mobile-navigation__link::before {
+
+
+/* .mobile-navigation__link::before {
     content: url('./images/hamburger.svg');
 }
 
@@ -265,4 +275,3 @@ a {
     width: 24px;
     height: 26px;
 }
-

@@ -1,20 +1,28 @@
-export class Button extends HTMLElement {
+import { Component } from "./Component.js";
+
+export class Button extends Component {
     constructor() {
         super();
-        this.props = [];
+        this.state = {
+            isActive: false
+        }
+        this.changeButton = this.changeButton.bind(this)
     }
 
-    removeSelf() {
-        this.render(this.props.src2);
-        this.addEventListener('click', () => {
-            this.connectedCallback();
-        })
+    changeButton() {
+        return this.setState((state) => {
+            return {
+                ...state,
+                isActive: !this.state.isActive
+            }
+        });
     }
 
     connectedCallback() {
-        this.render(this.props.src1);
-        this.addEventListener('click', () => {
-            return this.removeSelf();
+        this.render();
+        window.addEventListener('toggle-menu', this.changeButton);
+        this.addEventListener('click', ()=> {
+            return this.dispatch('toggle-menu')
         })
     }
 
@@ -22,23 +30,16 @@ export class Button extends HTMLElement {
         return ['src1', 'src2'];
     }
 
-    attributeChangedCallback(name, oldValue, newValue) {
-        this.getAttributeNames(name).forEach((name) => {
-            return this.props[name] = this.getAttribute(name);
-        })
-    }
-
-    render(props) {
-        this.innerHTML = `
+    render() {
+        return this.innerHTML = `
         <button class="header-mobile-wrapper__menu--button">
-            <img src="${props}" alt="hamburger"
+            <img src="${this.state.isActive ? this.props.src2 : this.props.src1}" alt="hamburger"
                 class="header-mobile-wrapper__menu--button-hmb header-mobile-wrapper__menu--button-close">
         </button>
         `
     }
 
     disconnectedCallback() {
-        this.addEventListener('click', this.removeSelf)
     }
 }
 
