@@ -25,11 +25,12 @@ export class List extends Component {
         this.render();
         window.addEventListener('toggle-menu', this.toggleMenu);
         this.addEventListener('click', (evt) => {
-            const target = evt.target.closest('.mobile-navigation__item');
+            const target = evt.target.closest('.header__navigation--dropdown');
             if (target) {
                 evt.preventDefault();
-                return this.dispatch('toggle-submenu')
+                return this.dispatch('toggle-submenu', 'sublinks')  
             }
+            evt.stopPropagation()
         })
     }
 
@@ -45,18 +46,20 @@ export class List extends Component {
                         if (item.href) {
                             return `
                                 <li class="mobile-navigation__item">
-                                    <a href="${item.href}" class="mobile-navigation__link">${item.label}</a>
+                                    <a href="${item.href}" class="mobile-navigation__link">
+                                    <img src="${item.icon ? item.icon : ''}" class="mobile-navigation__link--icon">
+                                    ${item.label}</a>
                                 </li>`
                         }
                         if (item.sublinks) {
                             return `
                                 <li class="mobile-navigation__item mobile-catalog">
-                                    <a href="${item.href}" class="mobile-navigation__link">
+                                    <a href="${item.href}" class="mobile-navigation__link  header__navigation--dropdown">
                                         <img src="${item.icon}" class="mobile-navigation__link--icon">
                                         ${item.label}
                                     </a>
+                                    <it-sublist sublinks='${JSON.stringify(item.sublinks)}'></it-sublist>
                                 </li>  
-                                <it-sublist sublinks='${JSON.stringify(item.sublinks)}'></it-sublist>
                             `
                         }
                         return `<li class="mobile-navigation__item">${item.label}</li>`

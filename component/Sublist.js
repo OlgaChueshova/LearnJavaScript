@@ -1,4 +1,5 @@
 import { Component } from "./Component.js";
+import { Subsublist } from "./SubSubList.js";
 
 export class Sublist extends Component {
     constructor() {
@@ -11,7 +12,6 @@ export class Sublist extends Component {
     }
 
     toggleSubmenu() {
-        console.log('bgcfx')
         return this.setState((state) => {
             return {
                 ...state,
@@ -23,6 +23,14 @@ export class Sublist extends Component {
     connectedCallback() {
         this.render();
         window.addEventListener('toggle-submenu', this.toggleSubmenu);
+        this.addEventListener('click', (evt) => {
+            const target = document.querySelector('.header__navigation--dropdown2');
+            if(target) {
+                evt.preventDefault();
+                return this.dispatch('it-toggleSubSubMenu');
+            }
+            evt.stopPropagation()
+        })
     }
 
     static get observedAttributes() {
@@ -33,11 +41,12 @@ export class Sublist extends Component {
         return `
             <ul class="mobile-navigation__subMenu ${this.state.isActive ? 'open' : 'closed'}">
                 ${this.props.map((item) => {
-                    return `
-                        <li class="mobile-catalog__submenu--item header__navigation--dropdown">
-                            <a href="${item.href}">${item.label}</a>
-                        </li>
-                    `
+                        return `
+                            <li class="mobile-catalog__submenu--item mobile-navigation-for-children__link">
+                                <a href="${item.href}" class='header__navigation--dropdown2'>${item.label}</a>
+                                ${item.sublinks ? `<it-subsublist subsublinks='${JSON.stringify(item.sublinks)}'></it-subsublist>` : ''}  
+                            </li>
+                        `                    
                 }).join(' ')} 
             </ul>
         `

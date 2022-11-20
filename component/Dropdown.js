@@ -12,15 +12,57 @@ export class Dropdown extends Component {
                 sublinks: [
                     {
                         label: 'Детям',
-                        href: ''
+                        href: '',
+                        sublinks: [
+                            {
+                                label: 'Робототехника',
+                                href: '//'
+                            },  
+                            {
+                                label: 'Шахматы',
+                                href: '//'
+                            },  
+                            {
+                                label: 'Программирование',
+                                href: '//'
+                            },  
+                        ]
                     },
                     {
                         label: 'Подросткам',
-                        href: ''
+                        href: '',
+                        sublinks: [
+                            {
+                                label: 'Робототехника',
+                                href: '//'
+                            },  
+                            {
+                                label: 'Шахматы',
+                                href: '//'
+                            },  
+                            {
+                                label: 'Программирование',
+                                href: '//'
+                            },  
+                        ]
                     },
                     {
                         label: 'Взрослым',
-                        href: ''
+                        href: '',
+                        sublinks: [
+                            {
+                                label: 'Робототехника',
+                                href: '//'
+                            },  
+                            {
+                                label: 'Шахматы',
+                                href: '//'
+                            },  
+                            {
+                                label: 'Программирование',
+                                href: '//'
+                            },  
+                        ]
                     },
                 ],
             },
@@ -78,7 +120,8 @@ export class Dropdown extends Component {
             {
                 label: 'Войти',
                 icon: './images/person.svg',
-                href: '//'
+                href: '//',
+                icon: './images/person.svg',
             },
             {
                 label: '8 800 950-33-98',
