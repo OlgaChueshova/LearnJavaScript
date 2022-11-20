@@ -7,7 +7,22 @@ export class Dropdown extends Component {
         this.links = [
             {
                 label: 'Все курсы',
-                href: '//'
+                href: '',
+                icon: './images/hamburger.svg',
+                sublinks: [
+                    {
+                        label: 'Детям',
+                        href: ''
+                    },
+                    {
+                        label: 'Подросткам',
+                        href: ''
+                    },
+                    {
+                        label: 'Взрослым',
+                        href: ''
+                    },
+                ],
             },
             {
                 label: 'Об академии',
@@ -35,10 +50,34 @@ export class Dropdown extends Component {
             },
             {
                 label: 'Нижний Новгород',
-                href: '//',
+                href: '',
+                icon: './images/location.svg',
+                sublinks: [
+                    {
+                        label: 'Москва',
+                        href: ''
+                    },
+                    {
+                        label: 'Новосибирск',
+                        href: ''
+                    },
+                    {
+                        label: 'Санкт-Петербург',
+                        href: ''
+                    },
+                    {
+                        label: 'Астрахань',
+                        href: ''
+                    },
+                    {
+                        label: 'Азов',
+                        href: ''
+                    },
+                ],
             },
             {
                 label: 'Войти',
+                icon: './images/person.svg',
                 href: '//'
             },
             {
@@ -47,7 +86,6 @@ export class Dropdown extends Component {
             },
             {
                 label: 'г.Москва, ул.Ленина, 50',
-                href: ''
             },
             {
                 label: 'info@futureacademy.ru',
