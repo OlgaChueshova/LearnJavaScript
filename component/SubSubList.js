@@ -40,6 +40,10 @@ export class Subsublist extends Component {
             </ul>
         `
     }
+
+    disconnectedCallback() {
+        window.removeEventListener('it-toggleSubSubMenu');
+    }
 }
 
 customElements.define('it-subsublist', Subsublist)

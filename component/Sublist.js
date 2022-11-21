@@ -11,7 +11,7 @@ export class Sublist extends Component {
         this.toggleSubmenu = this.toggleSubmenu.bind(this)
     }
 
-    toggleSubmenu(evt) {
+    toggleSubmenu() {
         return this.setState((state) => {
             return {
                 ...state,
@@ -24,8 +24,9 @@ export class Sublist extends Component {
         this.render();
         window.addEventListener('toggle-submenu', this.toggleSubmenu);
         this.addEventListener('click', (evt) => {
-            const target = document.querySelector('.header__navigation--dropdown2');
+            const target = evt.target.closest('.header__navigation--dropdown2');
             if(target) {
+                target.classList.toggle('mobile-navigation-for-children__link--active');
                 evt.preventDefault();
                 this.dispatch('it-toggleSubSubMenu');
                 evt.stopPropagation()
@@ -41,15 +42,26 @@ export class Sublist extends Component {
         return `
             <ul class="mobile-navigation__catalog mobile-navigation__subMenu ${this.state.isActive ? 'open' : 'closed'}">
                 ${this.props.map((item) => {
+                    if(item.sublinks){
                         return `
-                            <li class="mobile-catalog__submenu--item mobile-navigation-for-children__link">
-                                <a href="${item.href}" class='header__navigation--dropdown2'>${item.label}</a>
-                                ${item.sublinks ? `<it-subsublist subsublinks='${JSON.stringify(item.sublinks)}'></it-subsublist>` : ''}  
+                            <li class="mobile-catalog__submenu--item ">
+                                <a href="${item.href}" class='mobile-navigation-for-children__link header__navigation--dropdown2'>${item.label}</a>
+                                <it-subsublist subsublinks='${JSON.stringify(item.sublinks)}'></it-subsublist> 
                             </li>
-                        `                    
+                        `  
+                    }
+                    return `
+                        <li class="mobile-catalog__submenu--item">
+                            <a href="${item.href}" class='header__navigation--dropdown2'>${item.label}</a>
+                        </li>
+                `                    
                 }).join(' ')} 
             </ul>
         `
+    }
+
+    disconnectedCallback() {
+        window.removeEventListener('toggle-submenu');
     }
 }
 
