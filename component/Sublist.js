@@ -20,7 +20,7 @@ export class Sublist extends Component {
         })
     }
 
-    connectedCallback() {
+    componentWillMount() {
         this.render();
         window.addEventListener('toggle-submenu', this.toggleSubmenu);
         this.addEventListener('click', (evt) => {
@@ -29,7 +29,7 @@ export class Sublist extends Component {
                 target.classList.toggle('mobile-navigation-for-children__link--active');
                 evt.preventDefault();
                 this.dispatch('it-toggleSubSubMenu');
-                evt.stopPropagation()
+                evt.stopPropagation();
             }
         })
     }
@@ -52,7 +52,7 @@ export class Sublist extends Component {
                     }
                     return `
                         <li class="mobile-catalog__submenu--item">
-                            <a href="${item.href}" class='header__navigation--dropdown2'>${item.label}</a>
+                            <a href="${item.href}" class='header__navigation--dropdown2'>${item.label}</a> 
                         </li>
                 `                    
                 }).join(' ')} 
@@ -60,8 +60,8 @@ export class Sublist extends Component {
         `
     }
 
-    disconnectedCallback() {
-        window.removeEventListener('toggle-submenu');
+    componentWillUnmount() {
+        window.removeEventListener('toggle-submenu', this.toggleSubmenu);
     }
 }
 

@@ -12,7 +12,7 @@ export class List extends Component {
         this.toggleMenu = this.toggleMenu.bind(this)
     }
 
-    toggleMenu(evt) {
+    toggleMenu() {
         return this.setState((state) => {
             return {
                 ...state,
@@ -21,7 +21,7 @@ export class List extends Component {
         })
     }
 
-    connectedCallback() {
+    componentWillMount() {
         this.render();
         window.addEventListener('toggle-menu', this.toggleMenu);
         this.addEventListener('click', (evt) => {
@@ -29,9 +29,13 @@ export class List extends Component {
             if (target) {
                 evt.preventDefault();
                 this.dispatch('toggle-submenu');
-                evt.stopPropagation()  
+                evt.stopPropagation();  
             }
         })
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('toggle-menu', this.toggleMenu);
     }
 
     static get observedAttributes() {

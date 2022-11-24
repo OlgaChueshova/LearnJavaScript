@@ -10,7 +10,7 @@ export class Subsublist extends Component {
         this.toggleSubSubMenu = this.toggleSubSubMenu.bind(this)
     }
 
-    toggleSubSubMenu() {
+    toggleSubSubMenu(evt) {
         return this.setState((state) => {
             return {
                 isOpen: !this.state.isOpen
@@ -18,7 +18,7 @@ export class Subsublist extends Component {
         })
     }
 
-    connectedCallback() {
+    componentWillMount() {
         this.render();
         window.addEventListener('it-toggleSubSubMenu', this.toggleSubSubMenu);
     }
@@ -41,8 +41,8 @@ export class Subsublist extends Component {
         `
     }
 
-    disconnectedCallback() {
-        window.removeEventListener('it-toggleSubSubMenu');
+    componentWillUnmount() {
+        window.removeEventListener('it-toggleSubSubMenu', this.toggleSubSubMenu);
     }
 }
 
