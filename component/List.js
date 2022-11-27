@@ -27,7 +27,7 @@ export class List extends Component {
             evt.preventDefault();
             this.dispatch('toggle-submenu');
             evt.stopPropagation();
-        }/
+        }
     }
 
     componentDidMount() {
