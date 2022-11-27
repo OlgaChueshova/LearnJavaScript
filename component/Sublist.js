@@ -11,7 +11,7 @@ export class Sublist extends Component {
         this.toggleSubmenu = this.toggleSubmenu.bind(this)
     }
 
-    toggleSubmenu(evt) {
+    toggleSubmenu() {
         this.setState((state) => {
             return {
                 ...state,

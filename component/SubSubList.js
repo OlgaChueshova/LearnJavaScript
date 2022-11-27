@@ -10,7 +10,7 @@ export class Subsublist extends Component {
         this.toggleSubSubMenu = this.toggleSubSubMenu.bind(this)
     }
 
-    toggleSubSubMenu(evt) {
+    toggleSubSubMenu() {
         return this.setState((state) => {
             return {
                 isOpen: !this.state.isOpen
