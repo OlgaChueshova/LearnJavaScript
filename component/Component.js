@@ -12,7 +12,7 @@ export class Component extends HTMLElement {
 
     connectedCallback() {
         this.innerHTML = this.render();
-        this.componentWillMount();
+        this.componentDidMount();
     }
 
     disconnectedCallback() {

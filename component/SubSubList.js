@@ -18,13 +18,12 @@ export class Subsublist extends Component {
         })
     }
 
-    componentWillMount() {
-        this.render();
+    componentDidMount() {
         window.addEventListener('it-toggleSubSubMenu', this.toggleSubSubMenu);
     }
 
     static get observedAttributes() {
-        return ['subsublinks'];
+        return ['subsublinks', 'id'];
     }
 
     render() {

@@ -134,15 +134,38 @@ export class Dropdown extends Component {
                 label: 'info@futureacademy.ru',
                 href: 'Mailto:info@futureacademy.ru'
             },
+            [
+                {
+                    label: 'instagram',
+                    icon: './images/networks/instagram.svg',
+                    href: '//'
+                },
+                {
+                    label: 'facebook',
+                    icon: './images/networks/facebook.svg',
+                    href: '//'
+                },
+                {
+                    label: 'youtube',
+                    icon: './images/networks/youtube.svg',
+                    href: '//'
+                },
+                {
+                    label: 'telegram',
+                    icon: './images/networks/telegram.svg',
+                    href: '//'
+                },
+            ],
+            {
+                description: 'yandex',
+                icon: './images/yandex.svg',
+                href: '//'
+            }
         ];
     }
 
-    connectedCallback() {
-        this.render();
-    }
-
     render() {
-        this.innerHTML = `
+        return `
         <div class="header-mobile-wrapper__menu header__navigation--dropdown">
             <it-button src1="./images/hmb-mobile-white.svg" src2="./images/close-white.svg"></it-button>
             <it-list links='${JSON.stringify(this.links)}'></it-list>
