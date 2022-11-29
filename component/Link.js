@@ -7,16 +7,12 @@ export class Link extends Component {
         console.log(this.links)
     }
 
-    connectedCallback() {
-        this.render();
-    }
-
     static get observedAttributes() {
         return ['links'];
     }
 
     render() {
-        this.innerHTML =  `
+        return  `
         ${this.links.map((item) => {
             return `
             <li class="mobile-navigation__item header__navigation--dropdown mobile-catalog">
