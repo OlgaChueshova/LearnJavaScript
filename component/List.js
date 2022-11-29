@@ -1,5 +1,4 @@
 import { Component } from "./Component.js";
-import { Sublist } from "./Sublist.js";
 
 export class List extends Component {
     constructor() {
@@ -21,17 +20,8 @@ export class List extends Component {
         })
     }
 
-    componentWillMount() {
-        this.render();
+    componentDidMount() {
         window.addEventListener('toggle-menu', this.toggleMenu);
-        this.addEventListener('click', (evt) => {
-            const target = evt.target.closest('.header__navigation--dropdown');
-            if (target) {
-                evt.preventDefault();
-                this.dispatch('toggle-submenu');
-                evt.stopPropagation();  
-            }
-        })
     }
 
     componentWillUnmount() {
@@ -44,26 +34,34 @@ export class List extends Component {
 
     render() {
         return `
-            <aside class=${this.state.isOpen ? 'open' : 'closed'}>
-                <ul class="header-mobile-wrapper__menu--list mobile-navigation">
+            <aside class="${this.state.isOpen ? 'open' : 'closed'}  mobile-navigation">
+                <ul class="header-mobile-wrapper__menu--list">
                     ${this.props.map((item) => {
-                        if (item.href) {
+                        if (item.href || item.sublinks) {
                             return `
-                                <li class="mobile-navigation__item">
+                                <li class="mobile-navigation__item ">
                                     <a href="${item.href}" class="mobile-navigation__link">
-                                    <img src="${item.icon ? item.icon : ''}" class="mobile-navigation__link--icon">
-                                    ${item.label}</a>
-                                </li>`
-                        }
-                        if (item.sublinks) {
-                            return `
-                                <li class="mobile-navigation__item mobile-catalog">
-                                    <a href="${item.href}" class="mobile-navigation__link  header__navigation--dropdown">
-                                        <img src="${item.icon}" class="mobile-navigation__link--icon">
-                                        ${item.label}
+                                        <img src="${item.icon ? item.icon : ''}" class="mobile-navigation__link--icon">
+                                        ${item.label ? item.label : ''}
                                     </a>
-                                    <it-sublist sublinks='${JSON.stringify(item.sublinks)}'></it-sublist>
-                                </li>  
+                                </li>
+                            `
+                        }
+                        if (Array.isArray(item)) {
+                            return `
+                                <li class="mobile-navigation__item mobile-networks">
+                                    <ul class="mobile-networks__list">
+                                        ${item.map((subitem) => {
+                                            return ` 
+                                                <li class="mobile-networks__list--item">
+                                                    <a href="${subitem.href}" class="mobile-networks__list--link">
+                                                        <img src="${subitem.icon}" alt="${subitem.descriptions}">
+                                                    </a>
+                                                </li>
+                                            `
+                            }           ).join(' ')}
+                                    </ul>
+                                </li>
                             `
                         }
                         return `<li class="mobile-navigation__item">${item.label}</li>`
@@ -72,7 +70,6 @@ export class List extends Component {
             </aside>
         `
     }
-
 }
 
 customElements.define('it-list', List)

@@ -18,12 +18,13 @@ export class Button extends Component {
         });
     }
 
-    connectedCallback() {
-        this.render();
-        window.addEventListener('toggle-menu', this.changeButton);
-        this.addEventListener('click', ()=> {
-            return this.dispatch('toggle-menu')
-        })
+    onClick() {
+        return this.dispatch('toggle-menu');
+    }
+
+    componentDidMount() {
+        this.addEventListener('toggle-menu', this.changeButton);
+        this.addEventListener('click', this.onClick);
     }
 
     static get observedAttributes() {
@@ -32,14 +33,15 @@ export class Button extends Component {
 
     render() {
         return this.innerHTML = `
-        <button class="header-mobile-wrapper__menu--button">
-            <img src="${this.state.isActive ? this.props.src2 : this.props.src1}" alt="hamburger"
-                class="header-mobile-wrapper__menu--button-hmb header-mobile-wrapper__menu--button-close">
+        <button type="button" class="header-mobile-wrapper__menu--button">
+            <img src="${this.state.isActive ? this.props.src2 : this.props.src1}" alt="hamburger">
         </button>
         `
     }
 
-    disconnectedCallback() {
+    componentWillUnmount() {
+        this.removeEventListener('toggle-menu', this.changeButton);
+        this.removeEventListener('click', this.onClick)
     }
 }
 
