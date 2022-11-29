@@ -24,9 +24,10 @@ export class Sublist extends Component {
         const target = evt.target.closest('.header__navigation--dropdown2');
         if (target) {
             target.classList.toggle('header__navigation--dropdown2--active');
-            evt.preventDefault();
+            target.preventDefault();
+            target.stopPropagation();
             this.dispatch('it-toggleSubSubMenu');
-            evt.stopPropagation();
+         
         }
     }
 
