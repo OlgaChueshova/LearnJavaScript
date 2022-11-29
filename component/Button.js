@@ -32,7 +32,7 @@ export class Button extends Component {
     }
 
     render() {
-        return this.innerHTML = `
+        return `
         <button type="button" class="header-mobile-wrapper__menu--button">
             <img src="${this.state.isActive ? this.props.src2 : this.props.src1}" alt="hamburger">
         </button>
